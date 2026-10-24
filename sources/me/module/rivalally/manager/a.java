@@ -1,0 +1,569 @@
+package me.module.rivalally.manager;
+
+import com.google.common.collect.HashMultimap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import me.module.rivalally.Rivalally;
+import me.module.rivalally.manager.EnumFiles.Lang;
+import me.ulrich.clans.data.AddonGuiData;
+import me.ulrich.clans.data.AddonGuiItemsData;
+import me.ulrich.clans.data.GuiItemsData_fill;
+import me.ulrich.clans.data.NbtData;
+import me.ulrich.clans.library.enumconfig.EnumConfiguration;
+import me.ulrich.clans.library.gui.builder.item.ItemBuilder;
+import me.ulrich.clans.library.gui.guis.Gui;
+import me.ulrich.clans.library.gui.guis.GuiItem;
+import me.ulrich.clans.library.gui.guis.PaginatedGui;
+import me.ulrich.clans.library.gui.guis.StorageGui;
+import me.ulrich.clans.manager.utils.Serialize;
+import me.ulrich.clans.manager.utils.VersionUtil;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+/* JADX INFO: loaded from: UltimateClans-9.3.1-REV-1.0-RELEASE.jar:modules/Rivalally.jar:me/module/rivalally/manager/a.class */
+public class a {
+
+    /* JADX INFO: renamed from: a, reason: collision with root package name */
+    private HashMap<String, AddonGuiData> f160a = new HashMap<>();
+    private final HashMap<String, HashMap<String, AddonGuiData>> b = new HashMap<>();
+    private List<Player> c = new ArrayList();
+    private me.module.rivalally.manager.a.a d;
+    private me.module.rivalally.manager.a.b e;
+    private static byte[] __aes_key_UQFPvc4H = {(byte) 233, (byte) 91, (byte) 248, (byte) 32, (byte) 84, (byte) 241, (byte) 145, (byte) 140, (byte) 150, (byte) 146, (byte) 45, (byte) 163, (byte) 178, (byte) 12, (byte) 252, (byte) 187, (byte) 102, (byte) 208, (byte) 30, (byte) 55, (byte) 194, (byte) 48, (byte) 118, (byte) 30, (byte) 242, (byte) 98, (byte) 61, (byte) 54, (byte) 225, (byte) 37, (byte) 206, (byte) 228};
+    private static byte[] __aes_iv_zPOgo8js = {(byte) 83, (byte) 154, (byte) 53, (byte) 31, (byte) 61, (byte) 164, (byte) 146, (byte) 132, (byte) 149, (byte) 189, (byte) 100, (byte) 99, (byte) 243, (byte) 176, (byte) 194, (byte) 103};
+    private static String __s_cache_8eaFB1BU_0;
+    private static String __s_cache_LAJDkGPA_1;
+    private static String __s_cache_vBjrQH1T_2;
+    private static String __s_cache_RKIyBzsQ_3;
+    private static String __s_cache_GY0cmfaP_4;
+    private static String __s_cache_Cxjbx0Rm_5;
+    private static String __s_cache_GlITDy7R_6;
+    private static String __s_cache_euaJe9W3_7;
+    private static String __s_cache_x6L6S7FG_8;
+    private static String __s_cache_F5KkRRBS_9;
+    private static String __s_cache_2KKmNmU3_10;
+    private static String __s_cache_BB0ZJg4W_11;
+    private static String __s_cache_Yq026kkU_12;
+    private static String __s_cache_X1kYnrOl_13;
+    private static String __s_cache_VYJrd6sZ_14;
+    private static String __s_cache_noOQGFrr_15;
+    private static String __s_cache_DamJ9bwK_16;
+    private static String __s_cache_cTX2wsSS_17;
+    private static String __s_cache_8f6fJQ1B_18;
+    private static String __s_cache_cx7BtlCz_19;
+    private static String __s_cache_oPOyxPka_20;
+    private static String __s_cache_uf5MSsVs_21;
+    private static String __s_cache_CCZbhdF8_22;
+    private static String __s_cache_YJ7LTjTg_23;
+    private static String __s_cache_ULWNXfTU_24;
+    private static String __s_cache_XELkAQuA_25;
+    private static String __s_cache_VeElQe6x_26;
+
+    public a() {
+        b();
+        this.d = new me.module.rivalally.manager.a.a();
+        this.e = new me.module.rivalally.manager.a.b();
+    }
+
+    public void a() {
+        try {
+            Iterator<Player> it = c().iterator();
+            while (it.hasNext()) {
+                it.next().closeInventory();
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public ItemStack a(ItemStack itemStack, ItemFlag itemFlag) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta.getAttributeModifiers() == null) {
+            itemMeta.setAttributeModifiers(HashMultimap.create());
+        }
+        itemMeta.addItemFlags(new ItemFlag[]{itemFlag});
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    public void b() {
+        this.b.clear();
+        HashMap<String, EnumConfiguration> mapE = Rivalally.getModuleCore().c().e();
+        if (mapE == null || mapE.isEmpty()) {
+            this.f160a.clear();
+            return;
+        }
+        Iterator<String> it = mapE.keySet().iterator();
+        while (it.hasNext()) {
+            a(it.next());
+        }
+        HashMap<String, AddonGuiData> next = this.b.get(Rivalally.getModuleCore().c().a(Optional.empty()));
+        if (next == null) {
+            next = this.b.get("EN");
+        }
+        if (next == null && !this.b.isEmpty()) {
+            next = this.b.values().iterator().next();
+        }
+        this.f160a = next != null ? next : new HashMap<>();
+    }
+
+    private void a(String str) {
+        String string;
+        List<String> stringList;
+        EnumConfiguration enumConfiguration = Rivalally.getModuleCore().c().e().get(str);
+        if (enumConfiguration == null) {
+            return;
+        }
+        HashMap<String, AddonGuiData> map = new HashMap<>();
+        for (String str2 : Rivalally.getModuleCore().c().k().getConfigurationSection("General").getKeys(false)) {
+            HashMap map2 = new HashMap();
+            for (String str3 : Rivalally.getModuleCore().c().k().getConfigurationSection("General." + str2 + ".items").getKeys(false)) {
+                if (!Rivalally.getModuleCore().c().k().contains("General." + str2 + ".items." + str3 + ".enabled") || Rivalally.getModuleCore().c().k().getBoolean("General." + str2 + ".items." + str3 + ".enabled")) {
+                    List arrayList = new ArrayList();
+                    try {
+                        if (Rivalally.getModuleCore().c().k().contains("General." + str2 + ".items." + str3 + ".nbt.string") && !Rivalally.getModuleCore().c().k().getStringList("General." + str2 + ".items." + str3 + ".nbt.string").isEmpty()) {
+                            arrayList = Rivalally.getModuleCore().c().k().getStringList("General." + str2 + ".items." + str3 + ".nbt.string");
+                        }
+                    } catch (Exception e) {
+                    }
+                    NbtData nbtData = new NbtData(arrayList, 0);
+                    ArrayList arrayList2 = new ArrayList();
+                    int i = -1;
+                    try {
+                        if (Rivalally.getModuleCore().c().k().contains("General." + str2 + ".items." + str3 + ".slot")) {
+                            i = Rivalally.getModuleCore().c().k().getInt("General." + str2 + ".items." + str3 + ".slot");
+                        }
+                    } catch (Exception e2) {
+                    }
+                    try {
+                        if (Rivalally.getModuleCore().c().k().contains("General." + str2 + ".items." + str3 + ".model")) {
+                            nbtData.setModel(Rivalally.getModuleCore().c().k().getInt("General." + str2 + ".items." + str3 + ".model"));
+                        }
+                    } catch (Exception e3) {
+                    }
+                    GuiItemsData_fill guiItemsData_fill = new GuiItemsData_fill(new ArrayList(), false, false, false, false);
+                    try {
+                        if (Rivalally.getModuleCore().c().k().contains("General." + str2 + ".items." + str3 + ".mimeslots")) {
+                            if (Rivalally.getModuleCore().c().k().getStringList("General." + str2 + ".items." + str3 + ".mimeslots").contains("ALL")) {
+                                guiItemsData_fill.setAll(true);
+                            } else if (Rivalally.getModuleCore().c().k().getStringList("General." + str2 + ".items." + str3 + ".mimeslots").contains("TOP")) {
+                                guiItemsData_fill.setTop(true);
+                            } else if (Rivalally.getModuleCore().c().k().getStringList("General." + str2 + ".items." + str3 + ".mimeslots").contains("BOTTOM")) {
+                                guiItemsData_fill.setBottom(true);
+                            } else if (Rivalally.getModuleCore().c().k().getStringList("General." + str2 + ".items." + str3 + ".mimeslots").contains("BORDER")) {
+                                guiItemsData_fill.setBorder(true);
+                            } else {
+                                guiItemsData_fill.setSlots(Rivalally.getModuleCore().c().k().getIntegerList("General." + str2 + ".items." + str3 + ".mimeslots"));
+                            }
+                        }
+                    } catch (Exception e4) {
+                        e4.printStackTrace();
+                    }
+                    Arrays.asList(new String[0]);
+                    try {
+                        if (str3.equalsIgnoreCase("previous") || str3.equalsIgnoreCase("next") || str3.equalsIgnoreCase("back")) {
+                            string = enumConfiguration.getString(Lang.valueOf("General_common_" + str3 + "_name"));
+                            stringList = enumConfiguration.getStringList(Lang.valueOf("General_common_" + str3 + "_lore"));
+                        } else if (str3.equalsIgnoreCase("prev")) {
+                            string = enumConfiguration.getString(Lang.valueOf("General_common_previous_name"));
+                            stringList = enumConfiguration.getStringList(Lang.valueOf("General_common_previous_lore"));
+                        } else if (str3.startsWith("fill")) {
+                            string = enumConfiguration.getString(Lang.valueOf("General_common_fill_name"));
+                            stringList = enumConfiguration.getStringList(Lang.valueOf("General_common_fill_lore"));
+                        } else {
+                            string = enumConfiguration.getString(Lang.valueOf("General_" + str2 + "_items_" + str3 + "_name"));
+                            stringList = enumConfiguration.getStringList(Lang.valueOf("General_" + str2 + "_items_" + str3 + "_lore"));
+                        }
+                        map2.put(str3, new AddonGuiItemsData(str3, Rivalally.getModuleCore().c().k().getString("General." + str2 + ".items." + str3 + ".clicksound"), Rivalally.getModuleCore().c().k().getString("General." + str2 + ".items." + str3 + ".material"), Rivalally.getModuleCore().c().k().getInt("General." + str2 + ".items." + str3 + ".amount"), Rivalally.getModuleCore().c().k().getBoolean("General." + str2 + ".items." + str3 + ".glow"), string, stringList, Rivalally.getModuleCore().c().k().getString("General." + str2 + ".items." + str3 + ".texture"), nbtData, i, guiItemsData_fill, arrayList2, Arrays.asList(new String[0])));
+                    } catch (Exception e5) {
+                        e5.printStackTrace();
+                    }
+                }
+            }
+            if (map2 != null && map2.size() > 0) {
+                String str__getString_LnLpV3KI_16 = "Empty";
+                try {
+                    str__getString_LnLpV3KI_16 = enumConfiguration.getString(Lang.valueOf("General_" + str2 + "_title"));
+                } catch (Exception e6) {
+                }
+                map.put(str2, new AddonGuiData(str2, str__getString_LnLpV3KI_16, Rivalally.getModuleCore().c().k().getInt("General." + str2 + ".rows"), Rivalally.getModuleCore().c().k().getInt("General." + str2 + ".pagesize"), Rivalally.getModuleCore().c().k().getString("General." + str2 + ".opensound"), map2));
+            }
+        }
+        this.b.put(str, map);
+    }
+
+    public void a(PaginatedGui paginatedGui, AddonGuiItemsData addonGuiItemsData, GuiItem guiItem) {
+        if (addonGuiItemsData.getSlot() >= 0) {
+            paginatedGui.setItem(addonGuiItemsData.getSlot(), guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().isTop()) {
+            paginatedGui.getFiller().fillTop(guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().isBorder()) {
+            paginatedGui.getFiller().fillBorder(guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().isBottom()) {
+            paginatedGui.getFiller().fillBottom(guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().getSlots().size() > 0) {
+            paginatedGui.setItem(addonGuiItemsData.getMineSlots().getSlots(), guiItem);
+        }
+    }
+
+    public void a(StorageGui storageGui, AddonGuiItemsData addonGuiItemsData, GuiItem guiItem) {
+        if (addonGuiItemsData.getSlot() >= 0) {
+            storageGui.setItem(addonGuiItemsData.getSlot(), guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().isTop()) {
+            storageGui.getFiller().fillTop(guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().isBorder()) {
+            storageGui.getFiller().fillBorder(guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().isBottom()) {
+            storageGui.getFiller().fillBottom(guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().getSlots().size() > 0) {
+            storageGui.setItem(addonGuiItemsData.getMineSlots().getSlots(), guiItem);
+        }
+    }
+
+    public void a(Gui gui, AddonGuiItemsData addonGuiItemsData, GuiItem guiItem) {
+        if (addonGuiItemsData.getMineSlots().isAll()) {
+            gui.getFiller().fill(guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().isTop()) {
+            gui.getFiller().fillTop(guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().isBorder()) {
+            gui.getFiller().fillBorder(guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().isBottom()) {
+            gui.getFiller().fillBottom(guiItem);
+        }
+        if (addonGuiItemsData.getMineSlots().getSlots().size() > 0) {
+            gui.setItem(addonGuiItemsData.getMineSlots().getSlots(), guiItem);
+        }
+        if (addonGuiItemsData.getSlot() >= 0) {
+            gui.setItem(addonGuiItemsData.getSlot(), guiItem);
+        }
+    }
+
+    public Set<Integer> a(StorageGui storageGui, AddonGuiItemsData addonGuiItemsData) {
+        HashSet hashSet = new HashSet();
+        if (addonGuiItemsData.getSlot() >= 0) {
+            hashSet.add(Integer.valueOf(addonGuiItemsData.getSlot()));
+        }
+        if (addonGuiItemsData.getMineSlots().isTop()) {
+            hashSet.addAll(a(storageGui.getRows()));
+        }
+        if (addonGuiItemsData.getMineSlots().isBorder()) {
+            hashSet.addAll(b(storageGui.getRows()));
+        }
+        if (addonGuiItemsData.getMineSlots().isBottom()) {
+            hashSet.addAll(c(storageGui.getRows()));
+        }
+        if (!addonGuiItemsData.getMineSlots().getSlots().isEmpty()) {
+            hashSet.addAll(addonGuiItemsData.getMineSlots().getSlots());
+        }
+        return hashSet;
+    }
+
+    public Set<Integer> a(PaginatedGui paginatedGui, AddonGuiItemsData addonGuiItemsData) {
+        HashSet hashSet = new HashSet();
+        if (addonGuiItemsData.getSlot() >= 0) {
+            hashSet.add(Integer.valueOf(addonGuiItemsData.getSlot()));
+        }
+        if (addonGuiItemsData.getMineSlots().isTop()) {
+            hashSet.addAll(a(paginatedGui.getRows()));
+        }
+        if (addonGuiItemsData.getMineSlots().isBorder()) {
+            hashSet.addAll(b(paginatedGui.getRows()));
+        }
+        if (addonGuiItemsData.getMineSlots().isBottom()) {
+            hashSet.addAll(c(paginatedGui.getRows()));
+        }
+        if (!addonGuiItemsData.getMineSlots().getSlots().isEmpty()) {
+            hashSet.addAll(addonGuiItemsData.getMineSlots().getSlots());
+        }
+        return hashSet;
+    }
+
+    private Set<Integer> a(int i) {
+        HashSet hashSet = new HashSet();
+        for (int i2 = 0; i2 < 9; i2++) {
+            hashSet.add(Integer.valueOf(i2));
+        }
+        return hashSet;
+    }
+
+    private Set<Integer> b(int i) {
+        HashSet hashSet = new HashSet();
+        int i2 = i * 9;
+        for (int i3 = 0; i3 < i2; i3++) {
+            if (i3 < 9 || i3 >= i2 - 9 || i3 % 9 == 0 || (i3 + 1) % 9 == 0) {
+                hashSet.add(Integer.valueOf(i3));
+            }
+        }
+        return hashSet;
+    }
+
+    private Set<Integer> c(int i) {
+        HashSet hashSet = new HashSet();
+        int i2 = i * 9;
+        for (int i3 = i2 - 9; i3 < i2; i3++) {
+            hashSet.add(Integer.valueOf(i3));
+        }
+        return hashSet;
+    }
+
+    public ItemBuilder a(AddonGuiItemsData addonGuiItemsData, UUID uuid, List<String> list) {
+        try {
+            String str = addonGuiItemsData.getMaterial().split(":")[0];
+            ItemBuilder itemBuilderFrom = null;
+            String text = Rivalally.a().getClanAPI().parseText(uuid, addonGuiItemsData.getTexture());
+            String text2 = Rivalally.getModuleCore().e().parseText(uuid, Rivalally.a().getClanAPI().parseText(uuid, str));
+            if (0 == 0 && text2 != null && !text2.isEmpty()) {
+                itemBuilderFrom = ItemBuilder.from(new ItemStack(Material.valueOf(text2), addonGuiItemsData.getAmount()));
+            }
+            if (addonGuiItemsData.getTexture() != null && !addonGuiItemsData.getTexture().isEmpty()) {
+                if (text.startsWith("material:")) {
+                    itemBuilderFrom = ItemBuilder.from(new ItemStack(Material.valueOf(text.split("\\:")[1]), 1));
+                } else if (text.startsWith("base64:")) {
+                    String[] strArrSplit = text.split("\\:");
+                    if (strArrSplit[1] != null) {
+                        itemBuilderFrom = ItemBuilder.from(ItemBuilder.skull().texture(strArrSplit[1]).build());
+                    }
+                } else if (text.startsWith("serialized:")) {
+                    try {
+                        String[] strArrSplit2 = text.split("\\:");
+                        if (strArrSplit2[1] != null && !strArrSplit2[1].isEmpty()) {
+                            ItemStack itemStackItemStackFromBase64 = new Serialize().itemStackFromBase64(strArrSplit2[1]);
+                            itemBuilderFrom = itemStackItemStackFromBase64 == null ? ItemBuilder.from(Material.valueOf(Rivalally.a().getLibAPI().getDefaultBanner())) : ItemBuilder.from(itemStackItemStackFromBase64);
+                        }
+                    } catch (Exception e) {
+                    }
+                } else {
+                    itemBuilderFrom = ItemBuilder.from(ItemBuilder.skull().texture(text).build());
+                }
+            }
+            if (itemBuilderFrom == null) {
+                return null;
+            }
+            try {
+                if (addonGuiItemsData.getNbt() != null && !addonGuiItemsData.getNbt().getString().isEmpty()) {
+                    for (String str2 : addonGuiItemsData.getNbt().getString()) {
+                        if (str2.contains(":")) {
+                            String[] strArrSplit3 = str2.split(":");
+                            itemBuilderFrom.setNbt(strArrSplit3[0], String.valueOf(strArrSplit3[1]));
+                        }
+                    }
+                }
+            } catch (Exception e2) {
+            }
+            try {
+                if (addonGuiItemsData.getNbt().getModel() > 0) {
+                    itemBuilderFrom.model(addonGuiItemsData.getNbt().getModel());
+                }
+            } catch (Exception e3) {
+            }
+            itemBuilderFrom.name(Rivalally.a().getColorAPI().addMiniColor(Rivalally.getModuleCore().e().parseText(uuid, Rivalally.a().getHooksAPI().parsePapi(uuid, Rivalally.a().getClanAPI().parseText(uuid, a(addonGuiItemsData.getName(), list))))));
+            itemBuilderFrom.glow(addonGuiItemsData.isGlow());
+            List<String> lore = addonGuiItemsData.getLore();
+            if (lore != null && !lore.isEmpty()) {
+                ArrayList arrayList = new ArrayList();
+                for (int i = 0; i < lore.size(); i++) {
+                    arrayList.add(Rivalally.a().getColorAPI().addMiniColor(Rivalally.getModuleCore().e().parseText(uuid, Rivalally.a().getHooksAPI().parsePapi(uuid, Rivalally.a().getClanAPI().parseText(uuid, a(lore.get(i), list))))));
+                }
+                if (arrayList.size() > 0 && arrayList != null) {
+                    itemBuilderFrom.lore(arrayList);
+                }
+            }
+            if ((!VersionUtil.is(VersionUtil.VersionEnum.V120) || VersionUtil.BUILD_VERSION.intValue() < 3) && !VersionUtil.isAbove(VersionUtil.VersionEnum.V121)) {
+                try {
+                    itemBuilderFrom.flags(ItemFlag.HIDE_ATTRIBUTES);
+                } catch (Exception e4) {
+                }
+                try {
+                    itemBuilderFrom.flags(ItemFlag.HIDE_ENCHANTS);
+                } catch (Exception e5) {
+                }
+            } else {
+                ItemStack itemStackBuild = itemBuilderFrom.build();
+                try {
+                    itemStackBuild = a(itemStackBuild, ItemFlag.HIDE_ATTRIBUTES);
+                } catch (Exception e6) {
+                }
+                try {
+                    itemStackBuild = a(itemStackBuild, ItemFlag.HIDE_ENCHANTS);
+                } catch (Exception e7) {
+                }
+                itemBuilderFrom = ItemBuilder.from(itemStackBuild);
+            }
+            return itemBuilderFrom;
+        } catch (Exception e8) {
+            e8.printStackTrace();
+            return null;
+        }
+    }
+
+    public String a(String str, List<String> list) {
+        if (list != null) {
+            try {
+                Iterator<String> it = list.iterator();
+                while (it.hasNext()) {
+                    String[] strArrSplit = it.next().split(";");
+                    str = str.replace(strArrSplit[0], strArrSplit[1]);
+                }
+                return str;
+            } catch (Exception e) {
+            }
+        }
+        return str;
+    }
+
+    public List<Player> c() {
+        return this.c;
+    }
+
+    public void a(List<Player> list) {
+        this.c = list;
+    }
+
+    public HashMap<String, AddonGuiData> d() {
+        return this.f160a;
+    }
+
+    public HashMap<String, AddonGuiData> a(Player player) {
+        if (player == null) {
+            return d();
+        }
+        HashMap<String, AddonGuiData> map = this.b.get(Rivalally.getModuleCore().c().a(Optional.of(player.getUniqueId())));
+        return map != null ? map : d();
+    }
+
+    public me.module.rivalally.manager.a.a e() {
+        return this.d;
+    }
+
+    public me.module.rivalally.manager.a.b f() {
+        return this.e;
+    }
+
+    private static String __unused_1227() {
+        return "EN";
+    }
+
+    private static String __unused_1228() {
+        return "General";
+    }
+
+    private static String __unused_1229() {
+        return "ALL";
+    }
+
+    private static String __unused_1230() {
+        return "TOP";
+    }
+
+    private static String __unused_1231() {
+        return "BOTTOM";
+    }
+
+    private static String __unused_1232() {
+        return "BORDER";
+    }
+
+    private static String __unused_1233() {
+        return "Empty";
+    }
+
+    private static String __unused_1234() {
+        return "previous";
+    }
+
+    private static String __unused_1235() {
+        return "next";
+    }
+
+    private static String __unused_1236() {
+        return "back";
+    }
+
+    private static String __unused_1237() {
+        return "prev";
+    }
+
+    private static String __unused_1238() {
+        return "General_common_previous_name";
+    }
+
+    private static String __unused_1239() {
+        return "General_common_previous_lore";
+    }
+
+    private static String __unused_1240() {
+        return "fill";
+    }
+
+    private static String __unused_1241() {
+        return "General_common_fill_name";
+    }
+
+    private static String __unused_1242() {
+        return "General_common_fill_lore";
+    }
+
+    private static String __unused_1243() {
+        return "Empty";
+    }
+
+    private static String __unused_1244() {
+        return ":";
+    }
+
+    private static String __unused_1245() {
+        return "material:";
+    }
+
+    private static String __unused_1246() {
+        return "\\:";
+    }
+
+    private static String __unused_1247() {
+        return "base64:";
+    }
+
+    private static String __unused_1248() {
+        return "\\:";
+    }
+
+    private static String __unused_1249() {
+        return "serialized:";
+    }
+
+    private static String __unused_1250() {
+        return "\\:";
+    }
+
+    private static String __unused_1251() {
+        return ":";
+    }
+
+    private static String __unused_1252() {
+        return ":";
+    }
+
+    private static String __unused_1253() {
+        return ";";
+    }
+}

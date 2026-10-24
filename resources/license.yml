@@ -1,0 +1,57 @@
+# ---------------------------------------------------------------------------
+# Módulo de licencias de UltimateClans
+#
+# Modos (mode):
+#   off    -> sin comprobaciones. Es el valor por defecto: el plugin arranca
+#             exactamente igual que el original, sin hilos ni peticiones.
+#   local  -> autovalidación interna: verifica license.key con la clave
+#             pública, sin red. Si no hay archivo o no cuadra, avisa y deja
+#             arrancar (nunca bloquea).
+#   remote -> valida contra el servidor de licencias. Es el único modo que
+#             puede desactivar el plugin (ver LICENCIAS.md).
+# ---------------------------------------------------------------------------
+
+mode: off
+
+# Identificador del producto que debe llevar el token firmado.
+product-id: ultimateclans
+
+# Archivo con el token firmado para el modo local (dentro de la carpeta del plugin).
+local-license-file: "license.key"
+
+# URL del endpoint que emite los tokens (POST JSON). Solo modo remote.
+# Debe ser https; http solo se acepta para localhost.
+endpoint: "https://licencias.tudominio.com/v1/validate"
+
+# Clave que identifica a este cliente (la que entregas al comprador).
+license-key: ""
+
+# Clave pública Ed25519 en Base64 (la genera LicenseKeyTool keygen).
+public-key: ""
+
+# Huella SHA-256 de la clave pública (opcional pero recomendada).
+# Si se rellena, el plugin rechaza cualquier otra clave aunque esté bien formada.
+key-fingerprint: ""
+
+# Comportamiento si la licencia no es válida (solo modo remote).
+# true  -> el plugin se desactiva.
+# false -> solo avisa por consola (modo aviso, útil para probar).
+# En modo local nunca se desactiva el plugin.
+enforce: true
+
+# Horas de funcionamiento sin conexión con el servidor de licencias.
+grace-hours: 48
+allow-offline-grace: true
+
+# Tiempo máximo de espera de cada petición.
+request-timeout-seconds: 8
+
+# Revalidación periódica contra el backend.
+# false (por defecto) = modo puente: se pide la aprobación una vez al arrancar y después el
+# plugin funciona solo con la caché local, sin peticiones de fondo ni depender de la web.
+# true = vuelve a consultar cada refresh-hours (detecta revocaciones antes).
+periodic-validation: false
+refresh-hours: 6
+
+# Archivo donde se guarda el token y las marcas de tiempo.
+cache-file: "license-cache.json"

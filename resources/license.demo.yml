@@ -1,0 +1,33 @@
+# ---------------------------------------------------------------------------
+# CONFIGURACIÓN DE DEMOSTRACIÓN (solo para probar en local)
+#
+# Copia este archivo como license.yml para arrancar el plugin contra el
+# servidor de licencias incluido en licensing-server/.
+#
+#   1) cd ~/uclans-src/licensing-server && ADMIN_TOKEN=demo node server.js
+#   2) copia este archivo a plugins/UltimateClans/license.yml
+#   3) arranca el servidor de Minecraft
+#
+# Las claves de este archivo son de ejemplo: regenera las tuyas con
+# `node tools.js keygen` antes de usar esto en producción.
+# ---------------------------------------------------------------------------
+
+mode: remote
+product-id: ultimateclans
+
+# http solo se acepta para localhost; en producción usa https.
+endpoint: "http://127.0.0.1:8787/v1/validate"
+
+# Licencia de prueba creada con: node tools.js add --subject="MiServidor" --days=365
+license-key: "UC-E202-8E7D-E792-DFFA"
+
+public-key: "MCowBQYDK2VwAyEAixc/MGZc1KQ85oW+TBKxRUjzTnOLxYxqGDFEqX3eMYw="
+key-fingerprint: "a25aad76cfcc79fad3688553082d141441c29612f038624a4f8baee926e03315"
+
+enforce: true
+grace-hours: 48
+allow-offline-grace: true
+request-timeout-seconds: 5
+periodic-validation: false
+refresh-hours: 6
+cache-file: "license-cache.json"

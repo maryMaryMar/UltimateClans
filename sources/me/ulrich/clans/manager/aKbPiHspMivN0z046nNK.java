@@ -1,0 +1,207 @@
+package me.ulrich.clans.manager;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import me.ulrich.clans.Clans;
+import me.ulrich.clans.data.ClanEnum;
+import me.ulrich.clans.library.hikari.HikariConfig;
+import me.ulrich.clans.library.hikari.HikariDataSource;
+import me.ulrich.clans.manager.DTKXb4fQF6nDgxzg.tjCyMSV004ze7Mc.DTKXb4fQF6nDgxzg.ECMfR2SxjZy2nLBVbPf;
+import org.bukkit.plugin.java.JavaPlugin;
+
+/* JADX INFO: loaded from: UltimateClans-9.3.1-REV-1.0-RELEASE.jar:me/ulrich/clans/manager/aKbPiHspMivN0z046nNK.class */
+public class aKbPiHspMivN0z046nNK {
+    private HikariDataSource v8qP8fE86HMhvNuYPFjqY;
+    private JavaPlugin jBUuLP0sWwaPyPOmogdX7l;
+    private static volatile String McWe4iG76d3Ovvi;
+    private static volatile String lXb8YB4nNXq9G7YgoLHS8I;
+    private static String txzdN4qGbY2qIkP3iOHKG;
+    private static String MEJSNCZPGD8nDTFHAd30J;
+    private static String AklIYnZL8fLKdp2LQgvO6;
+    private static String LtyShXsGhPVwJjr;
+    private static String zSzCF7T7tOLaJk;
+    private static volatile String ZdCc9JHHRPXeHSrUO;
+    private static volatile String WG3QF9mB77Ymr0;
+    private static String Y4aYnrvjjlcpn6;
+    private static String WRXX0weYQxYNPfTbz0XAIU;
+    private static volatile String z0j0oUf2RNamwfsq;
+    private static volatile String Ti0aPtSIPLwcIzmJLdGjhx;
+    private static String LkdbggPluC4TUSvW2t6iw6;
+    private static volatile String z7odoP2yqWtp9sc7oL;
+    private static volatile String wcGCdUfpAOZpRCehu;
+    private static volatile String PkLu08v4NGkTANdmLZGm8;
+    private static volatile String Oue95bfbXF5MHBLN;
+    private static final byte[] os454S4FRKuV8RtaSt = {(byte) 237, (byte) 3, (byte) 158, (byte) 4, (byte) 213, (byte) 169, (byte) 156, (byte) 219, (byte) 201, (byte) 60, (byte) 139, (byte) 134, (byte) 12, (byte) 27, (byte) 254, (byte) 247, (byte) 188, (byte) 208, (byte) 53, (byte) 210, (byte) 119, (byte) 28, (byte) 91, (byte) 132, (byte) 163, (byte) 15, (byte) 89, (byte) 183, (byte) 170, (byte) 99, (byte) 16, (byte) 161};
+    private static final byte[] ZDjV4ECkKOz4SP = {(byte) 233, (byte) 18, (byte) 17, (byte) 118, (byte) 218, (byte) 215, (byte) 19, (byte) 143, (byte) 127, (byte) 44, (byte) 247, (byte) 53, (byte) 162, (byte) 173, (byte) 137, (byte) 245, (byte) 226, (byte) 44, (byte) 174, (byte) 37, (byte) 243, (byte) 173, (byte) 60, (byte) 102, (byte) 213, (byte) 40, (byte) 121, (byte) 229, (byte) 182, (byte) 203, (byte) 2, (byte) 38};
+    private static final byte[] cgL6VKZW4plMl0HWcGNLyK = {(byte) 82, (byte) 231, (byte) 192, (byte) 30, (byte) 55, (byte) 239, (byte) 173, (byte) 224, (byte) 108, (byte) 98, (byte) 219, (byte) 135, (byte) 226, (byte) 94, (byte) 16, (byte) 206, (byte) 222, (byte) 63, (byte) 127, (byte) 138, (byte) 200, (byte) 118, (byte) 49, (byte) 37, (byte) 181, (byte) 4, (byte) 127, (byte) 29, (byte) 244, (byte) 21, (byte) 211, (byte) 159, (byte) 130, (byte) 51, (byte) 121, (byte) 53, (byte) 119, (byte) 34, (byte) 210, (byte) 50, (byte) 26, (byte) 140, (byte) 255, (byte) 238, (byte) 28, (byte) 32, (byte) 249, (byte) 160};
+    private static final byte[] JCnbYYM7YG0wwI = {(byte) 233, (byte) 18, (byte) 17, (byte) 118, (byte) 218, (byte) 215, (byte) 19, (byte) 143, (byte) 127, (byte) 44, (byte) 247, (byte) 53, (byte) 162, (byte) 173, (byte) 137, (byte) 245, (byte) 226, (byte) 44, (byte) 174, (byte) 37, (byte) 243, (byte) 173, (byte) 60, (byte) 102, (byte) 213, (byte) 40, (byte) 121, (byte) 229, (byte) 182, (byte) 203, (byte) 2, (byte) 38};
+    private static final byte[] B6Bl9jm2SrU9SZqA8F = {(byte) 199, (byte) 225, (byte) 45, (byte) 248, (byte) 114, (byte) 125, (byte) 36, (byte) 167, (byte) 136, (byte) 94, (byte) 3, (byte) 8, (byte) 41, (byte) 233, (byte) 151, (byte) 160};
+    private static final byte[] pvz2o0NSpPfzl3220BBT = {(byte) 114, (byte) 206, (byte) 112, (byte) 85, (byte) 51, (byte) 167, (byte) 154, (byte) 113, (byte) 147, (byte) 96, (byte) 255, (byte) 188, (byte) 25, (byte) 179, (byte) 49, (byte) 240, (byte) 222, (byte) 60, (byte) 200, (byte) 214, (byte) 158, (byte) 49, (byte) 103, (byte) 132, (byte) 134, (byte) 141, (byte) 24, (byte) 37, (byte) 1, (byte) 158, (byte) 93, (byte) 69};
+    private static final byte[] mXiMLBmj3wUbYx9bqcsOh = {(byte) 215, (byte) 69, (byte) 126, (byte) 106, (byte) 231, (byte) 100, (byte) 113, (byte) 31, (byte) 141, (byte) 157, (byte) 201, (byte) 222, (byte) 176, (byte) 10, (byte) 92, (byte) 202};
+    private static final byte[] redbJ4qhvO51fS6JbdjO = {(byte) 228, (byte) 2, (byte) 216, (byte) 199, (byte) 252, (byte) 35, (byte) 203, (byte) 235, (byte) 57, (byte) 203, (byte) 197, (byte) 159, (byte) 43, (byte) 154, (byte) 176, (byte) 8, (byte) 242, (byte) 105, (byte) 19, (byte) 184, (byte) 126, (byte) 52, (byte) 143, (byte) 206, (byte) 105, (byte) 58, (byte) 212, (byte) 253, (byte) 228, (byte) 84, (byte) 182, (byte) 204};
+    private static final byte[] QfmBgKSD6JfKhs = {(byte) 141, (byte) 124, (byte) 126, (byte) 206, (byte) 20, (byte) 237, (byte) 162, (byte) 107, (byte) 111, (byte) 245, (byte) 251, (byte) 84, (byte) 242, (byte) 176, (byte) 97, (byte) 53};
+    private static final byte[] xLhYGvMzex2Rnaau = {(byte) 204, (byte) 176, (byte) 19, (byte) 231, (byte) 208, (byte) 165, (byte) 68, (byte) 197, (byte) 226, (byte) 76, (byte) 101, (byte) 105, (byte) 216, (byte) 24, (byte) 75, (byte) 6};
+    private static final byte[] k0nWd6hsTH883I = {(byte) 114, (byte) 206, (byte) 112, (byte) 85, (byte) 51, (byte) 167, (byte) 154, (byte) 113, (byte) 147, (byte) 96, (byte) 255, (byte) 188, (byte) 25, (byte) 179, (byte) 49, (byte) 240, (byte) 74, (byte) 27, (byte) 137, (byte) 101, (byte) 111, (byte) 98, (byte) 203, (byte) 126, (byte) 189, (byte) 211, (byte) 26, (byte) 102, (byte) 215, (byte) 224, (byte) 172, (byte) 226};
+    private static final byte[] VQYTlxU0hiE563K = {(byte) 114, (byte) 206, (byte) 112, (byte) 85, (byte) 51, (byte) 167, (byte) 154, (byte) 113, (byte) 147, (byte) 96, (byte) 255, (byte) 188, (byte) 25, (byte) 179, (byte) 49, (byte) 240, (byte) 74, (byte) 27, (byte) 137, (byte) 101, (byte) 111, (byte) 98, (byte) 203, (byte) 126, (byte) 189, (byte) 211, (byte) 26, (byte) 102, (byte) 215, (byte) 224, (byte) 172, (byte) 226};
+    private static final byte[] qRGx81yu6zA8Lh8p5YT = {(byte) 170, (byte) 246, (byte) 184, (byte) 79, (byte) 90, (byte) 86, (byte) 189, (byte) 214, (byte) 190, (byte) 63, (byte) 36, (byte) 13, (byte) 144, (byte) 172, (byte) 99, (byte) 51, (byte) 42, (byte) 149, (byte) 6, (byte) 120, (byte) 243, (byte) 104, (byte) 208, (byte) 119, (byte) 199, (byte) 24, (byte) 23, (byte) 10, (byte) 188, (byte) 170, (byte) 117, (byte) 68};
+    private static final byte[] QE9CALTd5ORsgDSfmw8 = {(byte) 57, (byte) 42, (byte) 145, (byte) 197, (byte) 80, (byte) 64, (byte) 78, (byte) 188, (byte) 185, (byte) 126, (byte) 61, (byte) 213, (byte) 255, (byte) 39, (byte) 183, (byte) 67, (byte) 88, (byte) 55, (byte) 87, (byte) 217, (byte) 86, (byte) 186, (byte) 174, (byte) 13, (byte) 195, (byte) 62, (byte) 97, (byte) 11, (byte) 225, (byte) 119, (byte) 235, (byte) 81};
+    private static final byte[] qxeldBH8cSSgGuv = {(byte) 105, (byte) 72, (byte) 235, (byte) 115, (byte) 101, (byte) 226, (byte) 115, (byte) 29, (byte) 194, (byte) 169, (byte) 42, (byte) 62, (byte) 170, (byte) 207, (byte) 14, (byte) 11};
+
+    public aKbPiHspMivN0z046nNK(ClanEnum.ClanStorage clanStorage, String str, String str2, String str3, int i, JavaPlugin javaPlugin) {
+        this.jBUuLP0sWwaPyPOmogdX7l = javaPlugin;
+        HikariConfig hikariConfig = new HikariConfig();
+        hikariConfig.setUsername(str2);
+        hikariConfig.setPassword(str3);
+        switch (MgqKcXJEXcYQNEHX7kBJ.v8qP8fE86HMhvNuYPFjqY[clanStorage.ordinal()]) {
+            case 1:
+                String string = Clans.getClanCore().getFiles().VkPRYe34Awk6AdSxoUC().getString(DZngGaB21LBPcc8Er39c6());
+                if (!Clans.getClanCore().getFiles().VkPRYe34Awk6AdSxoUC().getString(drIwtnFDDALQHOw()).isEmpty()) {
+                    hikariConfig.setDriverClassName(Clans.getClanCore().getFiles().VkPRYe34Awk6AdSxoUC().getString(Wff4wbpply84OQR()));
+                }
+                hikariConfig.setJdbcUrl(str + (string.isEmpty() ? "" : string));
+                hikariConfig.addDataSourceProperty(eIP75iKEtO8y2J7(), M1q7QCIGVpfEelmihhyN());
+                hikariConfig.addDataSourceProperty(JNUSZQflxNOOfT9Yo7LPyR(), A3S26Tfcnsf8uCKNT());
+                hikariConfig.addDataSourceProperty(TEXjMlOFaPNLLAhALjo(), a0BLEWPuMcJSdzmmui());
+                hikariConfig.addDataSourceProperty(Nyefz6Ht6hQsDbJP(), Integer.valueOf(i));
+                break;
+            case 2:
+                if (!Clans.getClanCore().getFiles().VkPRYe34Awk6AdSxoUC().getString(T5spCWXjC0eOaFX()).isEmpty()) {
+                    hikariConfig.setDriverClassName(Clans.getClanCore().getFiles().VkPRYe34Awk6AdSxoUC().getString(cX9rgYY5I7p4pl()));
+                }
+                hikariConfig.setJdbcUrl(str);
+                hikariConfig.setConnectionTestQuery(QywHQXZxrRiX8Tfi9mK());
+                break;
+        }
+        hikariConfig.setConnectionTimeout(300000L);
+        try {
+            this.v8qP8fE86HMhvNuYPFjqY = new HikariDataSource(hikariConfig);
+        } catch (Exception e) {
+            this.jBUuLP0sWwaPyPOmogdX7l.getLogger().warning(" - Connection error: " + e.getMessage());
+        }
+    }
+
+    public void v8qP8fE86HMhvNuYPFjqY() {
+        xtOheRiObl4QeAl();
+    }
+
+    public void jBUuLP0sWwaPyPOmogdX7l() {
+        if (this.v8qP8fE86HMhvNuYPFjqY == null) {
+            this.jBUuLP0sWwaPyPOmogdX7l.getLogger().info(cBTiUHGw4PSbWqPx());
+            return;
+        }
+        this.jBUuLP0sWwaPyPOmogdX7l.getLogger().info(HouVkOFt5XXTOF());
+        this.v8qP8fE86HMhvNuYPFjqY.close();
+        this.v8qP8fE86HMhvNuYPFjqY = null;
+    }
+
+    public void ZwrsrwOCXRUscW6Q() {
+        if (this.v8qP8fE86HMhvNuYPFjqY == null) {
+            this.jBUuLP0sWwaPyPOmogdX7l.getLogger().info(MWZWD7BUfDsHODTi577nGm());
+            return;
+        }
+        try {
+            this.jBUuLP0sWwaPyPOmogdX7l.getLogger().info(aitqfeaYlcX2Lz());
+            this.v8qP8fE86HMhvNuYPFjqY.getConnection().close();
+        } catch (SQLException e) {
+            this.jBUuLP0sWwaPyPOmogdX7l.getLogger().warning(" - Error closing active connections: " + e.getMessage());
+        }
+        this.jBUuLP0sWwaPyPOmogdX7l.getLogger().info(ZFP3DGKli6oaGpIC1());
+        this.v8qP8fE86HMhvNuYPFjqY.close();
+        this.v8qP8fE86HMhvNuYPFjqY = null;
+    }
+
+    public Connection iZTqZaRK5UGoe0Z() {
+        try {
+            if (this.v8qP8fE86HMhvNuYPFjqY != null) {
+                return this.v8qP8fE86HMhvNuYPFjqY.getConnection();
+            }
+            return null;
+        } catch (Exception e) {
+            this.jBUuLP0sWwaPyPOmogdX7l.getLogger().warning(" - Connection error: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public boolean xtOheRiObl4QeAl() {
+        try {
+            if (this.v8qP8fE86HMhvNuYPFjqY != null) {
+                this.v8qP8fE86HMhvNuYPFjqY.getConnection().close();
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private static String DZngGaB21LBPcc8Er39c6() {
+        return "Storage.mysql.args";
+    }
+
+    private static String drIwtnFDDALQHOw() {
+        return "Storage.datasource.mysql_class";
+    }
+
+    private static String Wff4wbpply84OQR() {
+        return "Storage.datasource.mysql_class";
+    }
+
+    private static String eIP75iKEtO8y2J7() {
+        return "cachePrepStmts";
+    }
+
+    private static String M1q7QCIGVpfEelmihhyN() {
+        return "true";
+    }
+
+    private static String JNUSZQflxNOOfT9Yo7LPyR() {
+        return "prepStmtCacheSize";
+    }
+
+    private static String A3S26Tfcnsf8uCKNT() {
+        return "250";
+    }
+
+    private static String TEXjMlOFaPNLLAhALjo() {
+        return "prepStmtCacheSqlLimit";
+    }
+
+    private static String a0BLEWPuMcJSdzmmui() {
+        return "2048";
+    }
+
+    private static String Nyefz6Ht6hQsDbJP() {
+        return "maximumPoolSize";
+    }
+
+    private static String T5spCWXjC0eOaFX() {
+        return "Storage.datasource.sqlite_class";
+    }
+
+    private static String cX9rgYY5I7p4pl() {
+        return "Storage.datasource.sqlite_class";
+    }
+
+    private static String QywHQXZxrRiX8Tfi9mK() {
+        return "SELECT 1;";
+    }
+
+    private static String cBTiUHGw4PSbWqPx() {
+        return " - Connection is null...";
+    }
+
+    private static String HouVkOFt5XXTOF() {
+        return " - Closing database connection...";
+    }
+
+    private static String MWZWD7BUfDsHODTi577nGm() {
+        return " - Connection is null...";
+    }
+
+    private static String aitqfeaYlcX2Lz() {
+        return " - Closing all connections...";
+    }
+
+    private static String ZFP3DGKli6oaGpIC1() {
+        return " - Closing HikariCP...";
+    }
+}

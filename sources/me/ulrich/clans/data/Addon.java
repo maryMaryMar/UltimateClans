@@ -1,0 +1,140 @@
+package me.ulrich.clans.data;
+
+import me.ulrich.clans.Clans;
+
+import java.io.File;
+import java.io.InputStream;
+import java.util.HashMap;
+import me.ulrich.clans.loader.Serializer;
+import me.ulrich.clans.loader.addon.AddonClassloader;
+import me.ulrich.clans.manager.jBWyXxi9EyWxcPiz;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
+
+/* JADX INFO: loaded from: UltimateClans-9.3.1-REV-1.0-RELEASE.jar:me/ulrich/clans/data/Addon.class */
+public abstract class Addon {
+    private boolean enabled;
+    private Serializer dataSerializer;
+    private Serializer configSerializer;
+    private JavaPlugin instance;
+    private String name;
+    private String author;
+    private String version;
+    private String require;
+    private AddonClassloader classLoader;
+    private File addonDataFolder;
+    private HashMap<String, InputStream> addonFiles;
+
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public void setEnabled(boolean z) {
+        this.enabled = z;
+    }
+
+    public JavaPlugin getInstance() {
+        return this.instance;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String str) {
+        this.name = str;
+    }
+
+    public AddonClassloader getClassLoader() {
+        return this.classLoader;
+    }
+
+    public void setClassLoader(AddonClassloader addonClassloader) {
+        this.classLoader = addonClassloader;
+    }
+
+    public File getAddonDataFolder() {
+        return this.addonDataFolder;
+    }
+
+    public void enable(JavaPlugin javaPlugin, File file, Serializer serializer, Serializer serializer2) {
+        try {
+            if (isEnabled()) {
+                this.instance.getLogger().warning("Error addon: " + file.getName() + ", The addon is already enabled.");
+            }
+            this.instance = javaPlugin;
+            this.addonDataFolder = file;
+            this.dataSerializer = serializer;
+            this.configSerializer = serializer2;
+            file.mkdirs();
+            onEnable();
+            setEnabled(true);
+        } catch (Exception e) {
+            logThis(e);
+        }
+    }
+
+    protected boolean logThis(Exception exc) {
+        try {
+            new jBWyXxi9EyWxcPiz((Clans) Bukkit.getPluginManager().getPlugin("UltimateClans")).v8qP8fE86HMhvNuYPFjqY(ExceptionUtils.getStackTrace(exc), "addon-" + this.addonDataFolder.getName() + "-stacktrace");
+            this.instance.getLogger().warning("Error addon: " + this.addonDataFolder.getName() + ", StackTrace: saved in /logs/addon-" + this.addonDataFolder.getName() + "-stacktrace.log");
+            return true;
+        } catch (ClassCastException e) {
+            this.instance.getLogger().warning("Error addon: " + this.addonDataFolder.getName() + ", StackTrace: Error to save log!");
+            return false;
+        }
+    }
+
+    public void disable() {
+        if (!isEnabled()) {
+            throw new IllegalStateException("Cannot disable the addon when it isn't enabled");
+        }
+        onDisable();
+        setEnabled(false);
+    }
+
+    public abstract void onEnable();
+
+    public abstract void onDisable();
+
+    public Serializer getDataSerializer() {
+        return this.dataSerializer;
+    }
+
+    public Serializer getConfigSerializer() {
+        return this.configSerializer;
+    }
+
+    public String getAuthor() {
+        return this.author;
+    }
+
+    public void setAuthor(String str) {
+        this.author = str;
+    }
+
+    public String getVersion() {
+        return this.version;
+    }
+
+    public void setVersion(String str) {
+        this.version = str;
+    }
+
+    public HashMap<String, InputStream> getAddonFiles() {
+        return this.addonFiles;
+    }
+
+    public void setAddonFiles(HashMap<String, InputStream> map) {
+        this.addonFiles = map;
+    }
+
+    public String getRequire() {
+        return this.require;
+    }
+
+    public void setRequire(String str) {
+        this.require = str;
+    }
+}

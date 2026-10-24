@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- ========================= -->
+	<!-- 📦 PROJECT -->
+	<!-- ========================= -->
+	<groupId>me.ulrich.clans</groupId>
+	<artifactId>Clans</artifactId>
+	<version>9.3.1</version>
+	<name>UltimateClans</name>
+	<!-- ========================= -->
+	<!-- ⚙️ PROPERTIES -->
+	<!-- ========================= -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>17</java.version>
+		<!-- default -->
+	</properties>
+	<!-- ========================= -->
+	<!-- 🔥 PROFILES -->
+	<!-- ========================= -->
+	<profiles>
+		<!-- DEFAULT -->
+		<profile>
+			<id>java17</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<java.version>17</java.version>
+			</properties>
+		</profile>
+		<!-- MODERN-->
+		<profile>
+			<id>java25</id>
+			<properties>
+				<java.version>25</java.version>
+			</properties>
+		</profile>
+	</profiles>
+	<!-- ========================= -->
+	<!-- 🔧 BUILD -->
+	<!-- ========================= -->
+	<build>
+		<plugins>
+			<!-- COMPILER -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+				<configuration>
+					<release>${java.version}</release>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<failOnError>true</failOnError>
+				</configuration>
+			</plugin>
+			<!-- SHADE -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.6.2</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<relocations>
+								<relocation>
+									<pattern>me.ulrich.econfig</pattern>
+									<shadedPattern>me.ulrich.clans.library.enumconfig</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>dev.triumphteam.gui</pattern>
+									<shadedPattern>me.ulrich.clans.library.gui</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>net.kyori</pattern>
+									<shadedPattern>me.ulrich.clans.library.kyori</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>com.github.retrooper</pattern>
+									<shadedPattern>me.ulrich.clans.library</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>io.github.retrooper</pattern>
+									<shadedPattern>me.ulrich.clans.library</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>com.zaxxer.hikari</pattern>
+									<shadedPattern>me.ulrich.clans.library.hikari</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>com.udojava</pattern>
+									<shadedPattern>me.ulrich.clans.library.udojava</shadedPattern>
+								</relocation>
+			
+								<relocation>
+									<pattern>com.github.Anon8281.universalScheduler</pattern>
+									<shadedPattern>me.ulrich.clans.library.universalScheduler</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>de.tr7zw.changeme.nbtapi</pattern>
+									<shadedPattern>me.ulrich.clans.library.nbtapi</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>kotlin</pattern>
+									<shadedPattern>me.ulrich.clans.library.kotlin</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>io.papermc.lib</pattern>
+									<shadedPattern>me.ulrich.clans.library.paperlib</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>net.megavex.scoreboardlibrary</pattern>
+									<shadedPattern>me.ulrich.clans.library.scoreboardlibrary</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>com.alessiodp.libby</pattern>
+									<shadedPattern>me.ulrich.clans.library.libby</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>com.github.fierioziy.particlenativeapi</pattern>
+									<shadedPattern>me.ulrich.clans.library.particlenativeapi</shadedPattern>
+								</relocation>
+<relocation>
+    <pattern>net.wesjd.anvilgui</pattern>
+    <shadedPattern>me.ulrich.clans.library.anvilgui</shadedPattern>
+</relocation>
+							</relocations>
+<filters>
+    <filter>
+        <artifact>net.wesjd:anvilgui</artifact>
+        <excludes>
+            <exclude>net/wesjd/anvilgui/version/Wrapper1_7*</exclude>
+            <exclude>net/wesjd/anvilgui/version/Wrapper1_8*</exclude>
+            <exclude>net/wesjd/anvilgui/version/Wrapper1_9*</exclude>
+            <exclude>net/wesjd/anvilgui/version/Wrapper1_10*</exclude>
+            <exclude>net/wesjd/anvilgui/version/Wrapper1_11*</exclude>
+            <exclude>net/wesjd/anvilgui/version/Wrapper1_12*</exclude>
+            <exclude>net/wesjd/anvilgui/version/Wrapper1_13*</exclude>
+            <exclude>net/wesjd/anvilgui/version/Wrapper1_14*</exclude>
+            <exclude>net/wesjd/anvilgui/version/Wrapper1_15*</exclude>
+            <exclude>net/wesjd/anvilgui/version/Wrapper1_16*</exclude>
+            <exclude>net/wesjd/anvilgui/version/Wrapper1_17*</exclude>
+        </excludes>
+    </filter>
+</filters>
+							<transformers>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>me.ulrich.clans.Clans</mainClass>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+<!-- RESOURCES -->
+		<resources>
+			<!-- 1. Mantém o seu original: Copia e filtra YML e NBT -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.yml</include>
+					<include>**/*.nbt</include>
+				</includes>
+			</resource>
+
+			<!-- 2. Regra nova: Copia os arquivos .jar de forma bruta (sem filtrar) -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.jar</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+	<!-- ========================= -->
+	<!-- 📦 REPOSITORIES -->
+	<!-- ========================= -->
+	<repositories>
+		<repository>
+			<id>spigot-repo</id>
+			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+		</repository>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+		<repository>
+			<id>codemc-repo</id>
+			<url>https://repo.codemc.io/repository/maven-public/</url>
+		</repository>
+		<repository>
+			<id>sirblobman-public</id>
+			<url>https://nexus.sirblobman.xyz/repository/public/</url>
+		</repository>
+		<!-- PVPMANAGER -->
+		<repository>
+			<id>codemc</id>
+			<url>https://repo.codemc.org/repository/maven-public/</url>
+		</repository>
+		<!-- PLAYERPOINTS -->
+		<repository>
+			<id>dakani</id>
+			<name>Dakani Nexus Repo</name>
+			<url>https://repo.dakanilabs.com/repository/public/</url>
+		</repository>
+		<!-- FLOODGATE -->
+		<repository>
+			<id>opencollab-snapshot</id>
+			<url>https://repo.opencollab.dev/main/</url>
+		</repository>
+		<!-- TeamVK -->
+		<repository>
+			<id>teamvk-repo</id>
+			<url> https://raw.githubusercontent.com/TeamVK/maven-repository/master/release/</url>
+		</repository>
+		<repository>
+			<id>papermc</id>
+			<url>https://repo.papermc.io/repository/maven-public/</url>
+		</repository>
+		<repository>
+			<id>essentials-releases</id>
+			<url>https://repo.essentialsx.net/releases/</url>
+		</repository>
+		<repository>
+			<id>paper-repo</id>
+			<url>https://papermc.io/repo/repository/maven-public/</url>
+		</repository>
+		<repository>
+			<id>megavex</id>
+			<url>https://git.megavex.net/api/packages/MegavexPublic/maven</url>
+		</repository>
+		<repository>
+			<id>codemc-releases</id>
+			<url>https://repo.codemc.io/repository/maven-releases/</url>
+		</repository>
+		<repository>
+			<id>codemc-snapshots</id>
+			<url>https://repo.codemc.io/repository/maven-snapshots/</url>
+		</repository>
+		<repository>
+			<id>evoke-snapshots</id>
+			<name>EvokeGames Maven</name>
+			<url>https://maven.evokegames.gg/snapshots</url>
+		</repository>
+		<!-- PlugMan -->
+		<repository>
+			<id>PlugMan</id>
+			<url>https://raw.githubusercontent.com/TheBlackEntity/PlugMan/repository/</url>
+		</repository>
+		<repository>
+			<id>mvn-wesjd-net</id>
+			<url>https://mvn.wesjd.net/</url>
+		</repository>
+		<repository>
+			<id>CodeMC</id>
+			<url>https://repo.codemc.org/repository/maven-public/</url>
+		</repository>
+        <repository>
+            <id>placeholderapi</id>
+            <url>https://repo.helpch.at/releases/</url>
+        </repository>
+
+	</repositories>
+	<dependencies>
+		<!-- Library BUILDER dependency, old compile -->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>7.0.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.UlrichBR</groupId>
+			<artifactId>EConfig</artifactId>
+			<version>3.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.udojava</groupId>
+			<artifactId>EvalEx</artifactId>
+			<version>2.7</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>dev.triumphteam</groupId>
+			<artifactId>triumph-gui</artifactId>
+			<version>3.1.13</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- End Library BUILDER, old compile -->
+		<!-- COMPILE dependency -->
+		<dependency>
+			<groupId>net.kyori</groupId>
+			<artifactId>adventure-api</artifactId>
+			<version>4.26.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.kyori</groupId>
+			<artifactId>adventure-text-minimessage</artifactId>
+			<version>4.26.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.kyori</groupId>
+			<artifactId>adventure-platform-bukkit</artifactId>
+			<version>4.4.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.kyori</groupId>
+			<artifactId>adventure-text-serializer-plain</artifactId>
+			<version>4.26.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.kyori</groupId>
+			<artifactId>adventure-text-serializer-legacy</artifactId>
+			<version>4.26.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.Anon8281</groupId>
+			<artifactId>UniversalScheduler</artifactId>
+			<version>0.1.7</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.papermc</groupId>
+			<artifactId>paperlib</artifactId>
+			<version>1.0.7</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.megavex</groupId>
+			<artifactId>scoreboard-library-api</artifactId>
+			<version>2.8.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.megavex</groupId>
+			<artifactId>scoreboard-library-implementation</artifactId>
+			<version>2.8.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!--JSON -->
+		<dependency>
+			<groupId>com.github.stleary</groupId>
+			<artifactId>JSON-java</artifactId>
+			<version>20251224</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tr7zw</groupId>
+			<artifactId>item-nbt-api</artifactId>
+			<version>2.16.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-api</artifactId>
+			<version>26.1.2-R0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.UlrichBR</groupId>
+			<artifactId>EntityWizard</artifactId>
+			<version>1.7.0</version>
+			<scope>provided</scope>
+		</dependency>
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.12.2</version>
+            <scope>provided</scope>
+        </dependency>
+		<dependency>
+			<groupId>org.geysermc.floodgate</groupId>
+			<artifactId>api</artifactId>
+			<version>2.2.4-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.skinsrestorer</groupId>
+			<artifactId>skinsrestorer-api</artifactId>
+			<version>15.0.7</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.LeonMangler</groupId>
+			<artifactId>SuperVanish</artifactId>
+			<version>6.2.18-3</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>me.chancesd.pvpmanager</groupId>
+			<artifactId>pvpmanager</artifactId>
+			<version>4.0.8</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.Zrips</groupId>
+			<artifactId>CMI-API</artifactId>
+			<version>9.8.6.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.essentialsx</groupId>
+			<artifactId>EssentialsX</artifactId>
+			<version>2.21.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.essentialsx</groupId>
+			<artifactId>EssentialsXChat</artifactId>
+			<version>2.21.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.LeonMangler</groupId>
+			<artifactId>PremiumVanishAPI</artifactId>
+			<version>2.9.18-2</version>
+			<scope>provided</scope>
+		</dependency>
+    <!-- <dependency>
+        <groupId>com.github.dumbo-the-developer.Duels</groupId>
+        <artifactId>duels-api</artifactId>
+        <version>8.0</version>
+        <scope>provided</scope>
+    </dependency> -->
+		<!-- End Provided -->
+		<dependency>
+			<groupId>com.rylinaux</groupId>
+			<artifactId>PlugMan</artifactId>
+			<version>2.3.3</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>2.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.23.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.23.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.14.0</version>
+			<scope>provided</scope>
+		</dependency>
+<dependency>
+    <groupId>net.wesjd</groupId>
+    <artifactId>anvilgui</artifactId>
+    <version>1.10.13-SNAPSHOT</version>
+    <scope>compile</scope>
+</dependency>
+	</dependencies>
+</project>

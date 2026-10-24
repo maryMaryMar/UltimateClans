@@ -1,0 +1,91 @@
+name: UltimateClans
+main: me.ulrich.clans.Clans
+version: 9.3.1
+author: UlrichBR
+website: https://polymart.org/team/ulrichcraft.99
+description: The best and most complete system of clans and lands.
+api-version: 1.13
+folia-supported: true
+softdepend: [ProtocolLib, Vault, SuperVanish, PlaceholderAPI, WorldGuard, Essentials, WorldEdit, PremiumVanish, CombatLogX, eco, UltimateKoth, UltimateOutpost, PlayerPoints, SimpleScore, SternalBoard, FeatherBoard, Fancyholograms, packetevents, EntityWizard, BlueMap, DeluxeCombat, PvPManager, TNE, floodgate, Duels, EconomyPlus, MythicMobs, dynmap, TitansBattle, HolographicDisplays, CMI, Holograms, DecentHolograms, ItemsAdder, TokenEnchant, SkinsRestorer, EcoBosses, EcoItems, EnchantmentSolution, NBTAPI, LevelledMobs, ElementalGems, UltimateBackPack, GriefDefender, GriefPrevention, TAB, HuskClaims, RedisChat, ProtectionStones, Nexo]
+commands:
+   uclan:
+      description: Open the help staff menu.
+      usage: /<command>
+      aliases: [uclans, uc, ugang, ug, uteam]
+   clan:
+      description: Open the help player menu.
+      usage: /<command>
+      aliases: [clans, c, gang, team, guild, guilda]
+
+permissions:
+   uclans.*:
+      description: "Bypass every restriction"
+      default: false
+      children:
+         uclans.admin: true
+         uclans.player: true
+
+   uclans.admin.*:
+      description: "Admin permission to manage the plugin"
+      default: false
+      children:
+         uclans.admin.use_gui: true
+         uclans.admin.help: true
+         uclans.admin.chatspy: true
+         uclans.admin.addslot: true
+         uclans.admin.setslot: true
+         uclans.admin.removeslot: true
+         uclans.admin.addpoints: true
+         uclans.admin.setpoints: true
+         uclans.admin.removepoints: true
+         uclans.admin.changetag: true
+         uclans.admin.resetplayerkdr: true
+         uclans.admin.resetclankdr: true
+         uclans.admin.globalff: true
+         uclans.admin.delete: true
+         uclans.admin.forcejoin: true
+         uclans.admin.verify: true
+         uclans.admin.reload: true
+         uclans.admin.emptyclans: true
+         uclans.admin.bank: true
+         uclans.admin.kick: true
+         uclans.admin.setleader: true
+         uclans.admin.extension: true
+
+   uclans.player:
+      description: "Default permission package for players"
+      default: false
+      children:
+         uclans.player.use_gui: true
+         uclans.player.help: true
+         uclans.player.create: true
+         uclans.player.cancel: true
+         uclans.player.changeleader: true
+         uclans.player.desc: true
+         uclans.player.disband: true
+         uclans.player.leave: true
+         uclans.player.join: true
+         uclans.player.deny: true
+         uclans.player.promote: true
+         uclans.player.demote: true
+         uclans.player.home: true
+         uclans.player.chat: true
+         uclans.player.ff: true
+         uclans.player.modtag: true
+         uclans.player.list: true
+         uclans.player.info: true
+         uclans.player.profile: true
+         uclans.player.rival: true
+         uclans.player.ally: true
+         uclans.player.member: true
+         uclans.player.settings: true
+         uclans.player.regroup: true
+         uclans.player.ban: true
+         uclans.player.unban: true
+         uclans.player.nickname: true
+         uclans.player.banner: true
+         uclans.player.role: true
+         uclans.player.logger: true
+         uclans.player.discord: true
+         uclans.player.mail: true
+         uclans.player.level: true
